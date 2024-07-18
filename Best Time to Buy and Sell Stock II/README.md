@@ -33,16 +33,37 @@ You are given an integer array `prices` where `prices[i]` is the price of a give
 
 ## Solution
 
-To solve this problem, we can use a greedy algorithm. The idea is to take advantage of every increase in stock price. Here's the Python implementation of the solution:
+To solve this problem, we can use a greedy algorithm. The idea is to take advantage of every increase in stock price. Here are two C implementations of the solution:
 
-```python
-def maxProfit(prices):
-    profit = 0
-    for i in range(1, len(prices)):
-        if prices[i] > prices[i - 1]:
-            profit += prices[i] - prices[i - 1]
-    return profit
+### Method 1
 
-# Example usage:
-# prices = [7, 1, 5, 3, 6, 4]
-# print(maxProfit(prices))  # Output: 7
+This method uses a `buy` variable to track the buying price and calculates the profit whenever there is an opportunity to sell for a higher price.
+
+```c
+// This is one way to solve the problem, time about 2ms
+int maxProfit(int* prices, int pricesSize) {
+    int buy = *(prices);
+    int max = 0;
+    for(int j=1; j<pricesSize; j++) {
+        if(buy < *(prices + j)) {
+            max += *(prices + j) - buy;
+        }
+        buy = *(prices + j);
+    }
+    return max;
+}
+```
+
+### Method 2
+
+```c
+int maxProfit(int* prices, int pricesSize) {
+    int profit=0;
+    for(int i=1;i<pricesSize;i++){
+        if(prices[i]>prices[i-1]){
+            profit+= prices[i]-prices[i-1];
+        }
+    }
+    return profit;
+}
+```
