@@ -1,0 +1,26 @@
+
+// This is one way to solve the problem  time about 2ms
+/*int maxProfit(int* prices, int pricesSize) {
+    int buy = *(prices);
+    int max = 0;
+    for(int j=1;j<pricesSize;j++){
+        if(buy<*(prices+j)){
+            max += *(prices+j)-buy;
+        }
+        buy = *(prices+j);
+    }
+    return max;
+}*/
+
+
+// I suggest this methord - time complex 0ms
+
+int maxProfit(int* prices, int pricesSize) {
+    int profit=0;
+    for(int i=1;i<pricesSize;i++){
+        if(prices[i]>prices[i-1]){
+            profit+= prices[i]-prices[i-1];
+        }
+    }
+    return profit;
+}
